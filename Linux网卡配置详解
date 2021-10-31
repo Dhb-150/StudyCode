@@ -1,0 +1,17 @@
+DEVICE=eth0 #指出设备名称
+NM_CONTROLLED=yes #network mamager的参数，实时生效，不需要重启
+ONBOOT=yes #设置为yes，开机自动启用网络连接
+IPADDR=192.168.21.129 #IP地址
+BOOTPROTO=none #设置为none禁止DHCP，设置为static启用静态IP地址，设置为dhcp开启DHCP服务
+NETMASK=255.255.255.0 #子网掩码
+DNS1=8.8.8.8 #第一个dns服务器
+TYPE=Ethernet #网络类型为：Ethernet
+GATEWAY=192.168.21.2 #设置网关
+DNS2=8.8.4.4 #第二个dns服务器
+IPV6INIT=no #禁止IPV6
+USERCTL=no #是否允许非root用户控制该设备，设置为no，只能用root用户更改
+HWADDR=00:0C:29:2C:E1:0F #网卡的Mac地址
+PREFIX=24
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+NAME="System eth0" #定义设备名称
