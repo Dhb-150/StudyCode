@@ -1,0 +1,80 @@
+https://www.cnblogs.com/rainbow70626/p/6216437.html
+Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG
+#这里定义能显示到的最低级别,若定义到INFO级别,则看不到DEBUG级别的信息了~!
+log4j.rootLogger=DEBUG
+#将DAO层log记录到DAOLog,allLog中
+log4j.logger.DAO=DEBUG,A2,A4
+#将逻辑层log记录到BusinessLog,allLog中
+log4j.logger.Businesslog=DEBUG,A3,A4
+
+#A1--打印到屏幕上
+log4j.appender.A1=org.apache.log4j.ConsoleAppender
+log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+log4j.appender.A1.layout.ConversionPattern=%-5p [%t] %37c %3x - %m%n
+
+#A2--打印到文件DAOLog中--专门为DAO层服务
+log4j.appender.A2=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.A2.file=DAOLog
+log4j.appender.A2.DatePattern='.'yyyy-MM-dd
+log4j.appender.A2.layout=org.apache.log4j.PatternLayout
+log4j.appender.A2.layout.ConversionPattern=[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+
+#A3--打印到文件BusinessLog中--专门记录逻辑处理层服务log信息
+log4j.appender.A3=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.A3.file=BusinessLog
+log4j.appender.A3.DatePattern='.'yyyy-MM-dd
+log4j.appender.A3.layout=org.apache.log4j.PatternLayout
+log4j.appender.A3.layout.ConversionPattern=[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+
+#A4--打印到文件alllog中--记录所有log信息
+log4j.appender.A4=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.A4.file=alllog
+log4j.appender.A4.DatePattern='.'yyyy-MM-dd
+log4j.appender.A4.layout=org.apache.log4j.PatternLayout
+log4j.appender.A4.layout.ConversionPattern=[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+
+#Appender的使用
+log4j.appender.A2=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.A2.file=demo
+log4j.appender.A2.DatePattern='.'yyyy-MM-dd
+log4j.appender.A2.layout=org.apache.log4j.PatternLayout
+log4j.appender.A2.layout.ConversionPattern=%m%n
+
+#Layout的配置
+log4j.appender.A2.layout=org.apache.log4j.PatternLayout
+log4j.appender.A2.layout.ConversionPattern=[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+
+ConversionPattern参数的格式含义
+格式名 含义
+%c 输出日志信息所属的类的全名
+%d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy-MM-dd HH:mm:ss }，输出类似：2002-10-18- 22：10：28
+%f 输出日志信息所属的类的类名
+%l 输出日志事件的发生位置，即输出日志信息的语句处于它所在的类的第几行
+%m 输出代码中指定的信息，如log(message)中的message
+%n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”
+%p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL。如果是调用debug()输出的，则为DEBUG，依此类推
+%r 输出自应用启动到输出该日志信息所耗费的毫秒数
+%t 输出产生该日志事件的线程名
+
+#1 定义了两个输出端
+log4j.rootLogger = INFO, A1, A2,A3
+
+#2 定义A1输出到控制器
+log4j.appender.A1 = org.apache.log4j.ConsoleAppender
+#3 定义A1的布局模式为PatternLayout
+log4j.appender.A1.layout = org.apache.log4j.PatternLayout
+#4 定义A1的输出格式
+log4j.appender.A1.layout.ConversionPattern = %-4r [%t] %-5p %c - %m%n
+
+#5 定义A2输出到文件
+log4j.appender.A2 = org.apache.log4j.RollingFileAppender
+#6 定义A2要输出到哪一个文件
+log4j.appender.A2.File = F:nepalonclassesexample3.log
+#7 定义A2的输出文件的最大长度
+log4j.appender.A2.MaxFileSize = 1KB
+#8 定义A2的备份文件数
+log4j.appender.A2.MaxBackupIndex = 3
+#9 定义A2的布局模式为PatternLayout
+log4j.appender.A2.layout = org.apache.log4j.PatternLayout
+#10 定义A2的输出格式
+log4j.appender.A2.layout.ConversionPattern = %d{yyyy-MM-dd hh:mm:ss}:%p %t %c - %m%n
